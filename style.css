@@ -140,13 +140,14 @@ a { color: inherit; }
   height: 100%;
   object-fit: cover;
   object-position: center 40%;
+  filter: brightness(1.26) saturate(1.12) contrast(1.04);
 }
 .hero__scrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(12,14,18,.55) 0%, rgba(12,14,18,.35) 30%, rgba(12,14,18,.55) 70%, rgba(12,14,18,.92) 100%),
-    linear-gradient(90deg, rgba(12,14,18,.92) 0%, rgba(12,14,18,.55) 45%, rgba(12,14,18,.15) 75%);
+    linear-gradient(180deg, rgba(12,14,18,.34) 0%, rgba(12,14,18,.18) 30%, rgba(12,14,18,.38) 70%, rgba(12,14,18,.78) 100%),
+    linear-gradient(90deg, rgba(12,14,18,.78) 0%, rgba(12,14,18,.43) 45%, rgba(12,14,18,.06) 75%);
 }
 .hero__content { position: relative; z-index: 2; max-width: 640px; }
 .hero__title {
