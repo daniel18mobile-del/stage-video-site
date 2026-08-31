@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Video — Activation</title>
+  <style>
+    :root{font-family:Inter,Segoe UI,sans-serif;background:#0e1118;color:#f5f7fb}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box}.card{max-width:580px;width:100%;background:#171c27;border:1px solid #2b3445;border-radius:16px;padding:32px;box-shadow:0 24px 70px #0008}h1{margin:0 0 10px}p{color:#bdc6d8;line-height:1.55}.key{display:none;margin:22px 0;padding:17px;border-radius:10px;background:#0b1018;border:1px solid #465671;font:700 20px/1.3 Consolas,monospace;letter-spacing:1px;word-break:break-all}.key.show{display:block}.copy{display:none;background:#ff613f;border:0;border-radius:8px;padding:11px 15px;color:white;font-weight:700;cursor:pointer}.copy.show{display:inline-block}.error{color:#ffb4a4}a{color:#ff987f}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Thank you for choosing Live Video</h1>
+    <p id="message">Checking your payment and preparing your activation key…</p>
+    <div id="key" class="key"></div>
+    <button id="copy" class="copy">Copy activation key</button>
+    <p>Open Live Video, choose <strong>Free plan</strong> in the upper-right, then paste this key to activate Pro on this computer. Keep a copy of the key in a safe place.</p>
+    <p><a href="/">Return to Live Video</a></p>
+  </main>
+  <script>
+    (async () => {
+      const sessionId = new URLSearchParams(location.search).get('session_id');
+      const message = document.querySelector('#message');
+      if (!sessionId) { message.textContent = 'We could not find a completed checkout session.'; message.className = 'error'; return; }
+      try {
+        const response = await fetch(`https://api.livevideo.cc/v1/claim?session_id=${encodeURIComponent(sessionId)}`);
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Your key is not ready yet.');
+        document.querySelector('#key').textContent = result.licenseKey;
+        document.querySelector('#key').classList.add('show');
+        document.querySelector('#copy').classList.add('show');
+        message.textContent = `Your ${String(result.plan || 'Pro').replaceAll('_', ' ')} activation key is ready.`;
+      } catch (error) { message.textContent = `${error.message} If payment just completed, refresh this page in a few moments.`; message.className = 'error'; }
+    })();
+    document.querySelector('#copy').onclick = async () => { await navigator.clipboard.writeText(document.querySelector('#key').textContent); document.querySelector('#copy').textContent = 'Copied'; };
+  </script>
+</body>
+</html>
