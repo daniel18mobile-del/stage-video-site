@@ -157,7 +157,7 @@
             <li class="tier__list-neg">No audio output</li>
             <li class="tier__list-neg">Watermarked output</li>
           </ul>
-          <button id="free-download" type="button" class="btn btn--ghost btn--lg">Download free</button>
+          <button id="free-download" type="button" class="btn btn--ghost btn--lg" aria-label="Download Live Video Free for Windows"><span>Download Free for Windows</span></button>
         </div>
         <div class="tier tier--paid">
           <p class="tier__badge">Most flexible</p>
@@ -187,7 +187,7 @@
 
 <dialog id="download-dialog" class="download-dialog">
   <form id="download-form" method="dialog">
-    <button class="download-dialog__close" value="cancel" aria-label="Close">×</button>
+    <button id="download-close" type="button" class="download-dialog__close" aria-label="Close download form">×</button>
     <p class="eyebrow">FREE WINDOWS DOWNLOAD</p>
     <h2>Get Live Video Free</h2>
     <p>Tell us a little about your show and your download will start right away.</p>
@@ -213,6 +213,7 @@
 <script>
   const downloadDialog = document.getElementById('download-dialog');
   document.getElementById('free-download').addEventListener('click', () => downloadDialog.showModal());
+  document.getElementById('download-close').addEventListener('click', () => downloadDialog.close());
   document.getElementById('download-form').addEventListener('submit', async event => {
     event.preventDefault();
     const form = event.currentTarget;
