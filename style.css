@@ -71,6 +71,8 @@ a { color: inherit; }
 }
 .btn--primary { background: var(--signal); color: #1a0704; }
 .btn--primary:hover { background: #ff7355; transform: translateY(-1px); }
+.btn--lifetime { background: #8573ff; color: #100d2e; }
+.btn--lifetime:hover { background: #9a8aff; transform: translateY(-1px); }
 .btn--ghost { color: var(--paper); border: 1px solid var(--line); }
 .btn--ghost:hover { border-color: var(--muted); }
 .btn--lg { padding: 16px 34px; font-size: 16px; }
@@ -276,6 +278,8 @@ a { color: inherit; }
   flex-direction: column;
 }
 .tier--paid { border-color: rgba(255, 91, 61, 0.5); box-shadow: 0 30px 60px -30px rgba(255, 91, 61, 0.35); }
+.tier--lifetime { border-color: rgba(133, 115, 255, 0.72); box-shadow: 0 30px 60px -30px rgba(133, 115, 255, 0.52); }
+.tier--lifetime .tier__badge { color: #100d2e; background: #8573ff; }
 .tier__badge {
   position: absolute;
   top: -12px;
