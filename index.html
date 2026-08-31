@@ -154,7 +154,7 @@
             <li class="tier__list-neg">No audio output</li>
             <li class="tier__list-neg">Watermarked output</li>
           </ul>
-          <a href="#download" class="btn btn--ghost btn--lg">Download free</a>
+          <button id="free-download" type="button" class="btn btn--ghost btn--lg">Download free</button>
         </div>
         <div class="tier tier--paid">
           <p class="tier__badge">Most flexible</p>
@@ -182,11 +182,58 @@
 
 </main>
 
+<dialog id="download-dialog" class="download-dialog">
+  <form id="download-form" method="dialog">
+    <button class="download-dialog__close" value="cancel" aria-label="Close">×</button>
+    <p class="eyebrow">FREE WINDOWS DOWNLOAD</p>
+    <h2>Get Live Video Free</h2>
+    <p>Tell us a little about your show and your download will start right away.</p>
+    <label>Name <input name="name" autocomplete="name" required></label>
+    <label>Email <input name="email" type="email" autocomplete="email" required></label>
+    <label>Phone <span>optional</span><input name="phone" type="tel" autocomplete="tel"></label>
+    <label>How will you use Live Video?<select name="useCase"><option value="">Choose one (optional)</option><option>DJ or VJ</option><option>Venue or live event</option><option>House of worship</option><option>School or community organization</option><option>Production company</option><option>Other</option></select></label>
+    <label>How did you hear about us?<select name="referral"><option value="">Choose one (optional)</option><option>Google or another search engine</option><option>Friend or colleague</option><option>Social media</option><option>Event or venue</option><option>Other</option></select></label>
+    <label class="download-dialog__check"><input name="privacyAccepted" type="checkbox" required> I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a>.</label>
+    <label class="download-dialog__check"><input name="marketingConsent" type="checkbox"> Send me occasional product news and updates.</label>
+    <p id="download-error" class="download-dialog__error" role="alert"></p>
+    <button id="download-submit" type="submit" class="btn btn--primary btn--lg">Download Free for Windows</button>
+  </form>
+</dialog>
+
 <footer class="site-footer">
   <div class="wrap site-footer__row">
     <span>Live Video</span>
+    <a href="privacy.html">Privacy</a>
   </div>
 </footer>
 
+<script>
+  const downloadDialog = document.getElementById('download-dialog');
+  document.getElementById('free-download').addEventListener('click', () => downloadDialog.showModal());
+  document.getElementById('download-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const submit = document.getElementById('download-submit');
+    const error = document.getElementById('download-error');
+    error.textContent = '';
+    submit.disabled = true;
+    submit.textContent = 'Preparing download…';
+    try {
+      const data = Object.fromEntries(new FormData(form));
+      data.privacyAccepted = form.elements.privacyAccepted.checked;
+      data.marketingConsent = form.elements.marketingConsent.checked;
+      const response = await fetch('https://api.livevideo.cc/v1/leads', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
+      const result = await response.json();
+      if (!response.ok || !result.downloadUrl) throw new Error(result.error || 'We could not start the download. Please try again.');
+      window.location.assign(result.downloadUrl);
+      downloadDialog.close();
+    } catch (requestError) {
+      error.textContent = requestError.message;
+    } finally {
+      submit.disabled = false;
+      submit.textContent = 'Download Free for Windows';
+    }
+  });
+</script>
 </body>
 </html>
