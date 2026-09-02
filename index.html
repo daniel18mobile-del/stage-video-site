@@ -39,6 +39,34 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Live Video?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Live Video is Windows video cue playback software for DJs, VJs, bands, houses of worship, venues, and event crews. Build a board of clips, then trigger them by click, keyboard hotkey, or MIDI controller." }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I send video to two screens?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Pro can mirror one video output or run two displays independently from the same cue board. Each display can have its own audio routing." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Live Video work with MIDI controllers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. MIDI Learn lets you assign a controller message to a cue. Live Video also flags conflicting MIDI assignments before a show starts." }
+    },
+    {
+      "@type": "Question",
+      "name": "What computer is recommended?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Use a 64-bit Windows 10 or 11 desktop, laptop, or Windows tablet with at least 8 GB of RAM and 256 GB of storage. Touchscreens are supported." }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -209,8 +237,8 @@
     <label>Name <input name="name" autocomplete="name" required></label>
     <label>Email <input name="email" type="email" autocomplete="email" required></label>
     <label>Phone <span>optional</span><input name="phone" type="tel" autocomplete="tel"></label>
-    <label>How will you use Live Video?<select name="useCase"><option value="">Choose one (optional)</option><option>DJ or VJ</option><option>Venue or live event</option><option>House of worship</option><option>School or community organization</option><option>Production company</option><option>Other</option></select></label>
-    <label>How did you hear about us?<select name="referral"><option value="">Choose one (optional)</option><option>Google or another search engine</option><option>Friend or colleague</option><option>Social media</option><option>Event or venue</option><option>Other</option></select></label>
+    <label>How will you use Live Video?<select name="useCase"><option value="">Choose one (optional)</option><option>Band</option><option>DJ or VJ</option><option>Venue or live event</option><option>House of worship</option><option>School or community organization</option><option>Production company</option><option>Other</option></select></label>
+    <label>How did you hear about us?<select name="referral"><option value="">Choose one (optional)</option><option>Google or another search engine</option><option>ChatGPT or other AI</option><option>Friend or colleague</option><option>Social media</option><option>Event or venue</option><option>Other</option></select></label>
     <label class="download-dialog__check"><input name="privacyAccepted" type="checkbox" required> I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a>.</label>
     <label class="download-dialog__check"><input name="marketingConsent" type="checkbox"> Send me occasional product news and updates.</label>
     <p id="download-error" class="download-dialog__error" role="alert"></p>
